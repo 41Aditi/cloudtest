@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>Calculator</title>
+  
+  <style>
+    #calculator {
+      width: 350px;
+      margin: 0 auto;
+      background-color: rgb(196, 191, 191);
+    }
+
+    #display {
+      width: 300px;
+      border: 1px solid rgb(16, 13, 13);
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    #output {
+      width: 300px;
+      border: 1px solid black;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    #buttons {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    button {
+      width: 75px;
+      height: 75px;
+      margin: 5px;
+      padding: 0;
+      font-size: 24px;
+      color: white;
+      background-color: rgb(15, 15, 15);
+    }
+
+    button:hover {
+      background-color: #ccc;
+    }
+
+    button:active {
+      background-color: #ccc;
+    }
+  </style>
+ 
+</head>
+<body>
+    <body style="background-color:rgb(94, 96, 96);">
+  <h1>Calculator</h1>
+  <div id="calculator">
+    <div id="output">
+      <input type="text" id="display" value="0">
+    </div>
+     <div id="buttons">
+      <button data-value="9">9</button>
+      <button data-value="8">8</button>
+      <button data-value="7">7</button>
+      <button data-value="+">+</button>
+      <button data-value="4">4</button>
+      <button data-value="5">5</button>
+      <button data-value="6">6</button>
+      <button data-value="-">-</button>
+      <button data-value="1">1</button>
+      <button data-value="2">2</button>
+      <button data-value="3">3</button>
+      <button data-value="/">÷</button>
+      <button data-value=".">.</button>
+      <button data-value="0">0</button>
+      <button data-value="=">=</button>
+      <button data-value="*">x</button>
+     <button data-value="AC">AC</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.querySelector("#display");
+    const output = document.querySelector("#output");
+    const buttons = document.querySelectorAll("#buttons button");
+
+    let expression = "";
+     buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const value = button.dataset.value;
+         if (/^\d$/.test(value)) {
+          expression += value;
+          display.value = expression;
+        }
+        else if (["+", "-", "*", "/"].includes(value)) {
+          expression += value;
+          display.value += value;
+        }
+        else if (value === "=") {
+          const result = eval(expression);
+          output.innerHTML = result;
+          expression = "";
+          display.value = result;
+        }
+         else if (value === "AC") {
+          expression = "";
+          display.value = "0";
+          output.innerHTML = "";
+        }
+      });
+    });
+  </script>
+</body>
+ </html>
+ 
